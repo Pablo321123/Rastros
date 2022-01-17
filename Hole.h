@@ -41,6 +41,8 @@ public:
 
     bool verifyHolesDisponible(int col, int row, Hole* m_board[8][8]);
 
+    void colorPreviousHouse(Hole* board[8][8], int rol, int col);
+
     void clearHolesDisponible(Hole* m_board[8][8]);
 
 public slots:

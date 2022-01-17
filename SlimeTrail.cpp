@@ -62,19 +62,20 @@ void SlimeTrail::play(int id) {
 
 
     if(hole->state() == hole->EmptyState && hole->isDisponible()){
-        hole->setState(Hole::BlackState);
+        hole->setState(Hole::WhiteState);
 
-        if(m_board[7][0]->state() == hole->BlackState){
+        bool avaibleSpace = hole->verifyHolesDisponible(hole->col(), hole->row(), m_board);
+
+        if(m_board[7][0]->state() == hole->WhiteState){
             QMessageBox::information(this, tr("Parabéns"), tr("O jogador VERMELHO venceu!!!"));
             this->reset();
-        }else if(m_board[0][7]->state() == hole->BlackState){
+        }else if(m_board[0][7]->state() == hole->WhiteState){
             QMessageBox::information(this, tr("Parabéns"), tr("O jogador AZUL venceu!!!"));
             this->reset();
         }
-        else if(hole->verifyHolesDisponible(hole->col(), hole->row(), m_board)){
+        else if(avaibleSpace){
             hole->setDisponible(false);
             emit turnEnded();
-
         }else{
             QMessageBox::information(this, tr("Empate"), tr("Nenhum dos dois jogando venceu!!!"));
             this->reset();
@@ -82,57 +83,84 @@ void SlimeTrail::play(int id) {
     }
 }
 
-bool Hole::verifyHolesDisponible(int col, int rol, Hole* board[8][8]){
-    bool isDisponible = false;
+void Hole::colorPreviousHouse(Hole* board[8][8], int rol, int col){
+
+    if(board[rol][col]->state() == WhiteState){
+        board[rol][col]->setState(BlackState);
+        board[rol][col]->setDisponible(false);
+    }
+}
+
+bool Hole::verifyHolesDisponible(int col, int rol, Hole* board[8][8]){    
+    int casas = 0; //Se entrar em apenas um desses ifs, significa que achou somente a casa branca, portanto nao a casas disponiveis;
     clearHolesDisponible(board);
 
     //Coluna
     int next_previus = col + 1;
-    if((next_previus <= 7 && (( board[rol][next_previus]->state() != BlackState) && (board[rol][next_previus]->state() != WhiteState)))){
+    if((next_previus <= 7 && (( board[rol][next_previus]->state() != BlackState)))){
         board[rol][next_previus]->setDisponible(true);
-        isDisponible = true;
+        colorPreviousHouse(board, rol, next_previus);
+        casas++;
     }
+
+
     next_previus = col - 1;
-    if((next_previus >= 0 &&( board[rol][next_previus]->state() != BlackState) && ( board[rol][next_previus]->state() != WhiteState))){
+    if((next_previus >= 0 &&( board[rol][next_previus]->state() != BlackState))){
         board[rol][next_previus]->setDisponible(true);
-        isDisponible = true;
+        colorPreviousHouse(board, rol, next_previus);
+        casas++;
     }
+
 
     //Linha
     next_previus = rol + 1;
-    if((next_previus <= 7 && ( board[next_previus][col]->state() != BlackState) && ( board[next_previus][col]->state() != WhiteState))){
+    if((next_previus <= 7 && ( board[next_previus][col]->state() != BlackState))){
         board[next_previus][col]->setDisponible(true);
-        isDisponible = true;
+        colorPreviousHouse(board, next_previus, col );
+        casas++;
+    }
 
-    }
+
     next_previus = rol - 1;
-    if((next_previus >= 0 && board[next_previus][col]->state() != BlackState) && ( board[next_previus][col]->state() != WhiteState)){
+    if((next_previus >= 0 && board[next_previus][col]->state() != BlackState)){
         board[next_previus][col]->setDisponible(true);
-        isDisponible = true;
+        colorPreviousHouse(board, next_previus, col );
+        casas++;
     }
+
 
     //diagonais
     //Inferiores
-    if((col+1) <= 7 && (rol+1) <= 7 &&(board[(rol+1)][col+1]->state() != BlackState) && (board[(rol+1)][col+1]->state() != WhiteState)){
+    if((col+1) <= 7 && (rol+1) <= 7 &&(board[(rol+1)][col+1]->state() != BlackState) ){
         board[(rol+1)][col+1]->setDisponible(true);
-        isDisponible = true;
+        colorPreviousHouse(board, (rol+1), (col+1) );
+        casas++;
     }
-    if((col-1) >= 0 && (rol+1) <= 7 &&( board[(rol+1)][col-1]->state() != BlackState) && ( board[(rol+1)][col-1]->state() != WhiteState)){
+
+
+    if((col-1) >= 0 && (rol+1) <= 7 &&( board[(rol+1)][col-1]->state() != BlackState)){
         board[(rol+1)][col-1]->setDisponible(true);
-        isDisponible = true;
+        colorPreviousHouse(board, (rol+1), (col-1));
+        casas++;
     }
+
 
     //Superiores
-    if((col-1) >= 0 && (rol-1) >= 0 &&(board[(rol-1)][col-1]->state() != BlackState) && (board[(rol-1)][col-1]->state() != WhiteState)){
+    if((col-1) >= 0 && (rol-1) >= 0 &&(board[(rol-1)][col-1]->state() != BlackState)){
         board[(rol-1)][col-1]->setDisponible(true);
-        isDisponible = true;
-    }
-    if(((col+1) <= 7) && ((rol-1) >= 0) && (board[(rol-1)][col+1]->state() != BlackState) && (board[(rol-1)][col+1]->state() != WhiteState)){
-        board[(rol-1)][col+1]->setDisponible(true);
-        isDisponible = true;
+        colorPreviousHouse(board, (rol-1), (col-1));
+        casas++;
     }
 
-    return isDisponible;
+
+    if(((col+1) <= 7) && ((rol-1) >= 0) && (board[(rol-1)][col+1]->state() != BlackState)){
+        board[(rol-1)][col+1]->setDisponible(true);
+        colorPreviousHouse(board, (rol-1), (col+1));
+        casas++;
+    }
+
+
+    return (casas > 1);
 
 }
 
@@ -176,7 +204,7 @@ void SlimeTrail::reset() {
 }
 
 void SlimeTrail::showAbout() {
-    QMessageBox::information(this, tr("Sobre"), tr("Rastros\n\nDesenvolvido por:\nPablo Vasconcelos da Cruz https://github.com/Pablo321123\nPedro Costa Calazans"));
+    QMessageBox::information(this, tr("Sobre"), tr("Rastros\n\nDesenvolvido por:\nPablo Vasconcelos da Cruz: https://github.com/Pablo321123\n Pedro Costa Calazans: https://github.com/pedrocostacalazans"));
 }
 
 void SlimeTrail::updateStatusBar() {
