@@ -9,7 +9,18 @@ Desenvolvido por:
 
 ![telaInicial](printsGame/telaInicial.png)
 
-## Jogabilidade
+## Menu
 
-![playGame](printsGame/playGame.png)
+![menuJogo](printsGame/menuJogo.png)
 
+![menuAjuda](printsGame/menuAjuda.png)
+
+## Vencedores
+
+![blueWin](printsGame/blueWin.png)
+
+![redWin](/home/pedrocc/Documentos/github/Rastros/printsGame/redWin.png)
+
+## Empate
+
+![empate](/home/pedrocc/Documentos/github/Rastros/printsGame/empate.png)
