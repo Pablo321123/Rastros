@@ -1,4 +1,4 @@
-<h1 align="center"> Rastros</h1
+<h1 align="center">Rastros</h1
 
 
 Desenvolvido por: 
@@ -12,7 +12,9 @@ Desenvolvido por:
 
 <h1 align="center">Tela Inicial</h1>
 
-![telaInicial](printsGame/telaInicial.png)
+<p align="center">
+    <img src="printsGame/telaInicial.png"/>
+</p>
 
 <h1 align="center">Menu</h1>
 
@@ -32,7 +34,6 @@ Desenvolvido por:
 <p align="center">
     <img src="printsGame/empate.png"/>
 </p>
-
-<p>
-    <a href="#Rastros">Voltar ao topo</a>
+<p align="center">
+    <a href="#rastros">Voltar ao topo</a>
 </p>
