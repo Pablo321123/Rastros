@@ -27,10 +27,12 @@ Desenvolvido por:
     <img src="printsGame/redWin.png" width="400"/>
     <img src="printsGame/blueWin.png" width="400"/>
 </p>
-
 <h1 align="center">Empate</h1>
 
-![empate](printsGame/empate.png)
+<p align="center">
+    <img src="printsGame/empate.png"/>
+</p>
 
-<p align="center"><a href="#rastros">Back to top</a></p>
-
+<p>
+    <a href="#Rastros">Voltar ao topo</a>
+</p>
