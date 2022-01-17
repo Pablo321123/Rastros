@@ -19,8 +19,8 @@ Desenvolvido por:
 
 ![blueWin](printsGame/blueWin.png)
 
-![redWin](/home/pedrocc/Documentos/github/Rastros/printsGame/redWin.png)
+![redWin](printsGame/redWin.png)
 
 ## Empate
 
-![empate](/home/pedrocc/Documentos/github/Rastros/printsGame/empate.png)
+![empate](printsGame/empate.png)
