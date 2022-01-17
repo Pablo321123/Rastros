@@ -1,4 +1,4 @@
-<h1 align="center"> Rastros (`Framework Qt` e `C++`)</h1
+<h1 align="center"> Rastros</h1
 
 
 Desenvolvido por: 
@@ -10,25 +10,27 @@ Desenvolvido por:
 
 <p align="center">  <a href="#tela-inicial">Tela Inicial</a> •  <a href="#menu">Menu</a> •   <a href="#vencedores">Vencedores</a> •   <a href="#empate">Empate</a>
 
-## Tela Inicial
+<h1 align="center">Tela Inicial</h1>
 
 ![telaInicial](printsGame/telaInicial.png)
 
-## Menu
+<h1 align="center">Menu</h1>
 
-![menuJogo](printsGame/menuJogo.png)
+<p align="middle"> 
+    <img src="printsGame/menuJogo.png" width="400"/>
+    <img src="printsGame/menuAjuda.png" width="400"/>
+</p>
 
-![menuAjuda](printsGame/menuAjuda.png)
+<h1 align="center">Vencedores</h1>
 
-## Vencedores
+<p align="middle"> 
+    <img src="printsGame/redWin.png" width="400"/>
+    <img src="printsGame/blueWin.png" width="400"/>
+</p>
 
-![blueWin](printsGame/blueWin.png)
-
-![redWin](printsGame/redWin.png)
-
-## Empate
+<h1 align="center">Empate</h1>
 
 ![empate](printsGame/empate.png)
 
-<a href="#tela-inicial">Back to top</a>
+<p align="center"><a href="#rastros">Back to top</a></p>
 
