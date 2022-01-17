@@ -30,5 +30,5 @@ Desenvolvido por:
 
 ![empate](printsGame/empate.png)
 
-<a href="#top">Back to top</a>
+<a href="#tela-inicial">Back to top</a>
 
